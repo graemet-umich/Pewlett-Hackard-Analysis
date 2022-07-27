@@ -209,3 +209,33 @@ ON (ce.emp_no = de.emp_no)
 INNER JOIN departments AS d
 ON (de.dept_no = d.dept_no);
 
+
+-- 7.3.6 Create a Tailored List
+
+-- Sales Retirees
+SELECT ce.emp_no,
+       ce.first_name,
+       ce.last_name,
+       d.dept_name
+-- INTO sales_retirees
+FROM current_emp as ce
+INNER JOIN dept_emp AS de
+  ON (ce.emp_no = de.emp_no)
+INNER JOIN departments AS d
+  ON (de.dept_no = d.dept_no)
+WHERE (de.to_date = '9999-01-01')
+  AND (d.dept_name = 'Sales');
+  
+-- Sales and Development Retirees
+SELECT ce.emp_no,
+       ce.first_name,
+       ce.last_name,
+       d.dept_name
+-- INTO sales_devel_retirees
+FROM current_emp as ce
+INNER JOIN dept_emp AS de
+  ON (ce.emp_no = de.emp_no)
+INNER JOIN departments AS d
+  ON (de.dept_no = d.dept_no)
+WHERE (de.to_date = '9999-01-01')
+  AND (d.dept_name IN ('Sales', 'Development'));
