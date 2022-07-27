@@ -156,3 +156,41 @@ ON (e.emp_no = de.emp_no)
 WHERE (e.birth_date BETWEEN '1952-01-01' AND '1955-12-31')
    AND (e.hire_date BETWEEN '1985-01-01' AND '1988-12-31')
    AND (de.to_date = '9999-01-01');
+
+-- List 2: Management
+
+-- My try. Uncomment for retirement eligible managers (2)
+-- Or use current_emp, which are just those retirement eligible, instead of employees
+SELECT d.dept_no,
+       d.dept_name,
+       e.emp_no,
+       e.last_name,
+       e.first_name,
+       dm.from_date,
+       dm.to_date
+FROM employees AS e
+INNER JOIN dept_manager AS dm
+ON (e.emp_no = dm.emp_no)
+INNER JOIN departments AS d
+ON (dm.dept_no = d.dept_no)
+WHERE --(e.birth_date BETWEEN '1952-01-01' AND '1955-12-31')
+   --AND (e.hire_date BETWEEN '1985-01-01' AND '1988-12-31')
+   --AND 
+   (dm.to_date = '9999-01-01');
+
+-- List of managers per department
+-- No filter for current managers (there are 2)
+SELECT  dm.dept_no,
+        d.dept_name,
+        dm.emp_no,
+        ce.last_name,
+        ce.first_name,
+        dm.from_date,
+        dm.to_date
+-- INTO manager_info
+FROM dept_manager AS dm
+INNER JOIN departments AS d
+    ON (dm.dept_no = d.dept_no)
+INNER JOIN current_emp AS ce
+    ON (dm.emp_no = ce.emp_no);
+ 
