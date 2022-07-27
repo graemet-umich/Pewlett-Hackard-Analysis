@@ -56,6 +56,8 @@ AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
 SELECT * FROM retirement_info;
 
 
+-- 7.3.3 Joins in Action
+
 -- Joining departments and dept_manager tables
 -- shows all employees who ever managed each department
 SELECT departments.dept_name,
@@ -107,3 +109,26 @@ ON ri.emp_no = de.emp_no
 WHERE de.to_date = ('9999-01-01');
 
 SELECT * FROM current_emp;
+
+
+-- 7.3.4 Use Count, Group By, and Order By
+
+-- Employee count by department number
+SELECT COUNT(ce.emp_no), de.dept_no
+FROM current_emp as ce
+LEFT JOIN dept_emp as de
+ON ce.emp_no = de.emp_no
+GROUP BY de.dept_no
+ORDER BY de.dept_no;
+
+-- ... and create table
+SELECT COUNT(ce.emp_no), de.dept_no
+INTO num_ret_elig_by_dept_no
+FROM current_emp as ce
+LEFT JOIN dept_emp as de
+ON ce.emp_no = de.emp_no
+GROUP BY de.dept_no
+ORDER BY de.dept_no;
+
+SELECT * FROM num_ret_elig_by_dept_no;
+
