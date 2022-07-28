@@ -1,4 +1,6 @@
+--
 -- Deliverable 1: The Number of Retiring Employees by Title
+--
 
 
 -- Steps 1-7
@@ -23,3 +25,32 @@ ORDER BY e.emp_no;
 SELECT * FROM retirement_titles
 LIMIT 10;
 
+
+-- Steps 8-15
+
+-- Use Dictinct with Orderby to remove duplicate rows
+-- Employee_Challenge_starter_code.sql query template
+
+-- SELECT DISTINCT ON (______) _____,
+-- ______,
+-- ______,
+-- ______
+
+-- INTO nameyourtable
+-- FROM _______
+-- WHERE _______
+-- ORDER BY _____, _____ DESC;
+
+SELECT DISTINCT ON (rt.emp_no)
+       rt.emp_no,
+       rt.first_name,
+       rt.last_name,
+       rt.title
+INTO unique_titles
+FROM retirement_titles AS rt
+WHERE rt.to_date = '9999-01-01'
+ORDER BY rt.emp_no, rt.to_date DESC;
+
+-- Confirm table
+SELECT * FROM unique_titles
+LIMIT 10;
