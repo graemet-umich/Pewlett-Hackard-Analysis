@@ -6,8 +6,6 @@
 -- Steps 1-7
 
 -- Create retirement_titles table
-DROP TABLE IF EXISTS retirement_titles;
-
 SELECT e.emp_no,
        e.first_name,
        e.last_name,
@@ -41,6 +39,8 @@ LIMIT 10;
 -- WHERE _______
 -- ORDER BY _____, _____ DESC;
 
+-- Remove duplicate rows in retirement_titles and
+-- put result in unique_titles
 SELECT DISTINCT ON (rt.emp_no)
        rt.emp_no,
        rt.first_name,
@@ -54,3 +54,18 @@ ORDER BY rt.emp_no, rt.to_date DESC;
 -- Confirm table
 SELECT * FROM unique_titles
 LIMIT 10;
+
+
+-- Steps 16-22
+
+-- Create retiring_titles, the number of retiring employees
+-- by job title
+SELECT COUNT(emp_no),
+       title
+INTO retiring_titles
+FROM unique_titles
+GROUP BY title
+ORDER BY COUNT(emp_no) DESC;
+
+-- Confirm table
+SELECT * FROM retiring_titles;
