@@ -1,4 +1,6 @@
-<img src="file://Resources/pgAdmin_logo.png" width="200" height="200" />
+
+![pgAdmin logo](./Resources/pgAdmin_logo.png)
+
 # Analysis of the Pewlett Hackard Database
 A Retirement Study of the Upcoming Boomer Generation "Silver Tsunami"
 
